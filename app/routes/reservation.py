@@ -1,10 +1,10 @@
-# routes/reservation.py
+# app/routes/reservation.py
 from fastapi import APIRouter, status, HTTPException, Depends
 from sqlalchemy import text
 from sqlmodel import Session, select
 from ..schemas import action_data_structure as schema_structures
 from app.db import get_session
-from app.validate_request import check_user_existence
+from app.validate_request import check_user_existence, check_equipment_existence
 
 router = APIRouter (prefix = "/reservations", tags = ["Reservations management"])
 
@@ -16,8 +16,14 @@ def create_reservation (reservation: schema_structures.reservation_create, sessi
             detail = f"User with ID {reservation.user_id} not found"
         )
     
+    if not check_equipment_existence (reservation.equipment_id, session): # check if row with passed equipment ID already exists
+        raise HTTPException (
+            status_code = status.HTTP_404_NOT_FOUND,
+            detail = f"Equipment with ID {reservation.equipment_id} not found"
+        )
+    
     new_reservation = schema_structures.Reservation (
-        equipment = reservation.equipment,
+        equipment_id = reservation.equipment_id,
         user_id = reservation.user_id,
         first_date = reservation.first_date,
         last_date = reservation.last_date
@@ -45,6 +51,13 @@ def update_reservation_by_id (reservation_id: int, reservation_patch: schema_str
                 detail = f"User with ID {reservation_patch.user_id} not found"
             )
     
+    if reservation_patch.equipment_id: # check if there's a new equipment ID value
+        if not check_equipment_existence (reservation_patch.equipment_id, session): # check if row with passed equipment ID already exists
+            raise HTTPException (
+                status_code = status.HTTP_404_NOT_FOUND,
+                detail = f"Equipment with ID {reservation_patch.equipment_id} not found"
+            )
+
     new_data = reservation_patch.model_dump (exclude_unset = True)
     old_reservation.sqlmodel_update (new_data)
     session.add (old_reservation)
