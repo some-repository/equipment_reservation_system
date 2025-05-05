@@ -1,6 +1,6 @@
 # app/main.py
 from fastapi import FastAPI
-from app.routes import actions
+from app.routes import reservation, user
 from app.db import init_database
 from contextlib import asynccontextmanager
 
@@ -25,4 +25,5 @@ app = FastAPI (
     }
 )
 
-app.include_router (actions.router)
+app.include_router (reservation.router)
+app.include_router (user.router)
