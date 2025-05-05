@@ -1,4 +1,6 @@
 # app/validate_request.py
+"""Module validates create and update reservation requests g data from User and Equipment tables"""
+
 from fastapi import Depends
 from sqlmodel import Session
 from app.db import get_session
@@ -17,4 +19,3 @@ def check_equipment_existence (equipment_id: int, session: Session = Depends (ge
         return False
     else:
         return True
-    

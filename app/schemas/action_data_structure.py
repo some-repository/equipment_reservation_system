@@ -1,4 +1,5 @@
 # app/schemas/action_data_structure.py
+"""Module defines data structures"""
 
 from datetime import date, timedelta
 from pydantic import (BaseModel, Field, BeforeValidator, EmailStr)

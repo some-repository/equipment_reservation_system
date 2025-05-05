@@ -1,4 +1,6 @@
 # app/main.py
+"""Module starts the application and initializes database if necessary"""
+
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.routes import reservation, user, equipment
@@ -6,7 +8,7 @@ from app.db import init_database
 
 @asynccontextmanager
 async def lifespan (app: FastAPI):
-    init_database () # initialise database on application start
+    init_database () # initialize database on application start
     yield
 
 app = FastAPI (

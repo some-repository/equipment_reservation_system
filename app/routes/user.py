@@ -1,4 +1,6 @@
 # app/routes/user.py
+"""Module process user CRUD requests"""
+
 from fastapi import APIRouter, status, Depends
 from sqlmodel import Session
 from app.db import get_session

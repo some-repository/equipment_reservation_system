@@ -1,4 +1,6 @@
 # app/routes/reservation.py
+"""Module process reservation CRUD requests"""
+
 from fastapi import APIRouter, status, HTTPException, Depends
 from sqlmodel import Session, select
 from app.validate_request import check_user_existence, check_equipment_existence

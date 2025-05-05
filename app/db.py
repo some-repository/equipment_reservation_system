@@ -1,4 +1,6 @@
 # app/db.py
+"""Module creates database when it's not present and provides access to it"""
+
 from sqlmodel import create_engine, Session, SQLModel
 
 DB_URL = "sqlite:///equipment_reservations_database.db"
