@@ -36,6 +36,7 @@ class Equipment (SQLModel, equipment_base, table = True): # equipment table
 # reservation-related classes
 class reservation_base (BaseModel):
     equipment_id: int
+    necessary_quantity: int
     user_id: int
     first_date: date
     last_date: date
@@ -45,6 +46,7 @@ class reservation_create (reservation_base):
 
 class reservation_update (BaseModel):
     equipment_id: int | None = None # None allows to update only a part of attributes
+    necessary_quantity: int | None = None
     user_id: int | None = None
     first_date: date | None = None
     last_date: date | None = None

@@ -7,7 +7,6 @@ from app.validate_request import check_user_existence, check_equipment_existence
 from app.db import get_session
 from ..schemas import action_data_structure as schema_structures
 
-
 router = APIRouter (prefix = "/reservations", tags = ["Reservations management"])
 
 # add reservation, for URL root/reservations/, code 201 on success
@@ -31,6 +30,7 @@ def create_reservation (reservation: schema_structures.reservation_create,
 
     new_reservation = schema_structures.Reservation (
         equipment_id = reservation.equipment_id,
+        necessary_quantity = reservation.necessary_quantity,
         user_id = reservation.user_id,
         first_date = reservation.first_date,
         last_date = reservation.last_date
