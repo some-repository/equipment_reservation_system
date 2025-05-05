@@ -11,12 +11,11 @@ async def lifespan (app: FastAPI):
 
 app = FastAPI (
     lifespan = lifespan, # used for initialising database
-    title = "Система управления доступом к оборудованию",
-    description = "Система для бронирования оборудования на время использования, основанная на "
-                "фреймворке FastAPI.",
+    title = "Equipment reservation system",
+    description = "A simple equipment reservation system for the time of use based on the FastAPI framework.",
     version = "0.0.1",
     contact = {
-        "name": "Владислав Киселев",
+        "name": "Vladislav Kiselev",
         "email": "example@example.example",
     },
     license_info = {
