@@ -1,8 +1,8 @@
 # app/main.py
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.routes import reservation, user, equipment
 from app.db import init_database
-from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan (app: FastAPI):
